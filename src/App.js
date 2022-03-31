@@ -1,46 +1,32 @@
-import styled from "styled-components";
 import React, { useState } from "react";
+import styled from "styled-components";
+import { Button, Center } from "./components";
 
-const Container = styled.div`
+const Container = styled(Center)`
   width: 40%;
   height: 300px;
   margin: 20px auto;
   border: 2px solid lightgrey;
   border-radius: 8px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 `;
 
-const Button = styled.button`
-  padding: 20px;
-  border: none;
-  border-radius: 30px;
-  background-color: purple;
-  color: white;
-  cursor: pointer;
-`;
-
-const Background = styled.div`
+const Background = styled(Center)`
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const ModalBox = styled.div`
+const ModalBox = styled(Center)`
   width: 300px;
-  height: 120px;
+  height: ${({ height }) => height ?? 120}px;
   background-color: white;
   border-radius: 12px;
   color: black;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 `;
 
@@ -57,7 +43,7 @@ const Content = styled.p`
   font-size: 17px;
 `;
 
-function Modal() {
+function App() {
   const [modal, setModal] = useState(false);
 
   const showModal = () => {
@@ -71,16 +57,20 @@ function Modal() {
   return (
     <Container>
       <Button onClick={showModal}>Open Modal</Button>
-      {modal === true ? (
+      {/* <Modal isOpen={modal} onClickClose={closeModal} /> */}
+      {/* <Modal>
+        <Button>Open Modal</Button>
+      </Modal> */}
+      {modal && (
         <Background>
           <ModalBox>
             <CloseButton onClick={closeModal}>X</CloseButton>
             <Content>HELLO CODESTATES!</Content>
           </ModalBox>
         </Background>
-      ) : null}
+      )}
     </Container>
   );
 }
 
-export default Modal;
+export default App;
